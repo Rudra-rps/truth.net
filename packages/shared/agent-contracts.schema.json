@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TruthNet Agent Contracts",
+  "description": "Universal interface definitions for all TruthNet agents",
+  
+  "definitions": {
+    "AgentRequest": {
+      "type": "object",
+      "required": ["request_id", "media_path", "media_type", "agent_type"],
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for this analysis request"
+        },
+        "media_path": {
+          "type": "string",
+          "description": "Absolute path to the media file to analyze"
+        },
+        "media_type": {
+          "type": "string",
+          "enum": ["video", "image", "audio"],
+          "description": "Type of media being analyzed"
+        },
+        "agent_type": {
+          "type": "string",
+          "enum": ["visual", "metadata", "audio", "lipsync"],
+          "description": "Agent performing the analysis"
+        },
+        "options": {
+          "type": "object",
+          "description": "Agent-specific configuration options",
+          "additionalProperties": true
+        }
+      }
+    },
+
+    "Signal": {
+      "type": "object",
+      "required": ["signal_type", "confidence", "description"],
+      "properties": {
+        "signal_type": {
+          "type": "string",
+          "description": "Type of signal detected (e.g., 'face_warp', 'missing_exif')"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Confidence level for this signal (0.0 to 1.0)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the signal"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Severity of the signal"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional context (frame numbers, timestamps, etc.)",
+          "additionalProperties": true
+        }
+      }
+    },
+
+    "AgentResponse": {
+      "type": "object",
+      "required": ["request_id", "agent_type", "status", "risk_score", "signals"],
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Matching request ID from the request"
+        },
+        "agent_type": {
+          "type": "string",
+          "enum": ["visual", "metadata", "audio", "lipsync"],
+          "description": "Agent that performed the analysis"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "partial", "failed"],
+          "description": "Analysis completion status"
+        },
+        "risk_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Agent's risk assessment (0.0 = authentic, 1.0 = high risk)"
+        },
+        "signals": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Signal" },
+          "description": "List of detected signals/anomalies"
+        },
+        "processing_time_ms": {
+          "type": "number",
+          "description": "Time taken to process in milliseconds"
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": { "type": "string" },
+            "message": { "type": "string" },
+            "details": { "type": "object" }
+          },
+          "description": "Error information if status is 'failed'"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Agent-specific output metadata",
+          "additionalProperties": true
+        }
+      }
+    },
+
+    "OrchestratorResponse": {
+      "type": "object",
+      "required": ["request_id", "verdict", "risk_score", "reasons", "agent_breakdown"],
+      "properties": {
+        "request_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "verdict": {
+          "type": "string",
+          "enum": ["AUTHENTIC", "SUSPICIOUS", "HIGH_RISK"],
+          "description": "Final verdict on the media"
+        },
+        "risk_score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Weighted aggregate risk score"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Confidence in the verdict"
+        },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Top reasons for the verdict (human-readable)"
+        },
+        "agent_breakdown": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AgentResponse" },
+          "description": "Individual agent responses"
+        },
+        "processing_time_ms": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+# Lipsync Agent - Python Dependencies
+
+# Web framework
+fastapi==0.108.0
+uvicorn[standard]==0.25.0
+pydantic==2.5.0
+
+# Video/Audio processing
+opencv-python==4.8.1.78
+numpy==1.26.2
+librosa==0.10.1
+
+# HTTP client
+httpx==0.25.2
+
+# Utilities
+python-multipart==0.0.6

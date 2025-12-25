@@ -1,0 +1,19 @@
+{
+  "name": "truthnet",
+  "version": "1.0.0",
+  "description": "TruthNet - Multimodal AI Monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean"
+  },
+  "devDependencies": {}
+}

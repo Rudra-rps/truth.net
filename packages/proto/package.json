@@ -1,0 +1,12 @@
+{
+  "name": "@truthnet/proto",
+  "version": "1.0.0",
+  "description": "gRPC protobuf definitions and generated code",
+  "private": true,
+  "scripts": {
+    "build": "npm run proto:compile",
+    "proto:compile": "echo 'Add protoc compilation here'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

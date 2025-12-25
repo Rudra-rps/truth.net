@@ -1,0 +1,14 @@
+{
+  "name": "@truthnet/audio-agent",
+  "version": "1.0.0",
+  "description": "Audio processing service",
+  "private": true,
+  "scripts": {
+    "dev": "python -m src.main",
+    "build": "echo 'No build needed for Python service'",
+    "lint": "pylint src/",
+    "test": "pytest"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

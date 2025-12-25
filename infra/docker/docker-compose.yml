@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker/Dockerfile.api-go
+    ports:
+      - "8080:8080"
+    environment:
+      - VISUAL_AGENT_URL=visual-agent:50051
+      - AUDIO_AGENT_URL=audio-agent:50052
+      - LIPSYNC_AGENT_URL=lipsync-agent:50053
+      - METADATA_AGENT_URL=metadata-agent:50054
+
+  frontend:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  visual-agent:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker/Dockerfile.visual-agent
+    ports:
+      - "50051:50051"
+
+  audio-agent:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker/Dockerfile.audio-agent
+    ports:
+      - "50052:50052"
+
+  lipsync-agent:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker/Dockerfile.lipsync-agent
+    ports:
+      - "50053:50053"
+
+  metadata-agent:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker/Dockerfile.metadata-agent
+    ports:
+      - "50054:50054"

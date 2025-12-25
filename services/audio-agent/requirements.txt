@@ -1,0 +1,17 @@
+# Audio Agent - Python Dependencies
+
+# Web framework
+fastapi==0.108.0
+uvicorn[standard]==0.25.0
+pydantic==2.5.0
+
+# Audio processing
+librosa==0.10.1
+soundfile==0.12.1
+numpy==1.26.2
+
+# HTTP client
+httpx==0.25.2
+
+# Utilities
+python-multipart==0.0.6

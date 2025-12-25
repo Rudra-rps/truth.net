@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+__pycache__
+*.egg-info
+dist
+build
+
+# Testing
+coverage
+*.pytest_cache
+
+# Production
+.next
+out
+*.exe
+*.o
+*.a
+
+# Misc
+.DS_Store
+*.pem
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDEs
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# OS
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+go.sum
+
+Roadmap.md
