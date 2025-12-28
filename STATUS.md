@@ -23,6 +23,16 @@
   - Color inconsistency detection
 - **Test:** `python src/test_analyzer.py` ✅ PASSED
 
+### ✅ Metadata Agent (Implemented!)
+- **Location:** `services/metadata-agent/`
+- **Status:** ✅ WORKING
+- **Features:**
+  - EXIF data extraction & validation
+  - Timestamp anomaly detection
+  - Editing software trace detection
+  - File format consistency checks
+- **Test:** `python src/test_analyzer.py` ✅ PASSED
+
 ---
 
 ## 🎯 Current Status
@@ -32,8 +42,8 @@
 | Contracts | ✅ Done | Go + Python |
 | Contract Tests | ✅ Done | Both passing |
 | Visual Agent | ✅ Done | Fully working |
-| Metadata Agent | ⏳ TODO | Next step |
-| Go API | ⏳ TODO | Phase 2 |
+| Metadata Agent | ✅ Done | Fully working |
+| Go API | ⏳ TODO | Next step |
 | Orchestrator | ⏳ TODO | Phase 4 |
 | Frontend | ⏳ TODO | Phase 7 |
 
@@ -61,21 +71,18 @@ cd apps\api-go
 go test ./contracts -v
 ```
 
+### Test Metadata Agent
+```powershell
+cd services\metadata-agent
+.\venv\Scripts\Activate.ps1
+python src\test_analyzer.py
+```
+
 ---
 
 ## 📋 Next Steps (In Order)
 
-### 1. Build Metadata Agent (Next!)
-```powershell
-cd services\metadata-agent
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
-
-Create `src/main.py` similar to visual agent structure.
-
-### 2. Build Go API Server
+### 1. Build Go API Server (Next!)
 - File upload handler
 - Media preprocessing (FFmpeg)
 - Agent communication
