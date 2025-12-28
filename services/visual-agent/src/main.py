@@ -154,9 +154,15 @@ def shutdown_event():
 
 if __name__ == "__main__":
     import uvicorn
+    
+    port = int(os.getenv("PORT", "8001"))
+    
+    print(f"🎨 Starting Visual Agent on port {port}")
+    print(f"🔍 Analyzer: MediaPipe Face Detection + Artifact Analysis")
+    
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=50051,
+        port=port,
         log_level="info"
     )
